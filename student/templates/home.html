@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Job Portal</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+        }
+
+        .container {
+            width: 500px;
+            margin: 100px auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 15px;
+            color: #222;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .login-btn {
+            display: block;
+            padding: 13px;
+            background-color: #222;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        .login-btn:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Student Job Portal</h1>
+
+        <p>
+            Find job opportunities and manage your applications easily.
+        </p>
+
+        <a href="{% url 'login' %}" class="login-btn">
+            Login
+        </a>
+
+    </div>
+
+</body>
+</html>

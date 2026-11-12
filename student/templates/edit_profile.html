@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 15px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e0c3fc, #c2e9fb, #fbc2eb);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        h1 {
+            text-align: center;
+            color: #6c3dbb;
+        }
+
+        label {
+            display: block;
+            margin: 20px 0 8px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d5c5ed;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        button, .back {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button {
+            color: white;
+            background: linear-gradient(90deg, #8e44ad, #4776e6);
+        }
+
+        .back {
+            color: #6c3dbb;
+            background: #f0e8ff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1> Edit My Profile</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label for="bio">About Me</label>
+            <textarea
+                id="bio"
+                name="bio"
+                placeholder="Write something about yourself..."
+            >{{ profile.bio }}</textarea>
+
+            <label for="skills">My Skills</label>
+            <input
+                type="text"
+                id="skills"
+                name="skills"
+                value="{{ profile.skills }}"
+                placeholder="Python, Django, SQL"
+            >
+
+            <button type="submit">Save Changes</button>
+            <a href="{% url 'profile' %}" class="back">Back to Profile</a>
+        </form>
+    </div>
+</body>
+</html>

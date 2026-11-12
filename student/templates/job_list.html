@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Jobs | Student Job Portal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+            background: linear-gradient(120deg, #c5eafa, #eac9ed);
+        }
+
+        header {
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 3px 12px #00000010;
+        }
+
+        header h2 {
+            margin: 0;
+            color: #713dc5;
+        }
+
+        .container {
+            padding: 30px;
+            min-height: 85vh;
+        }
+
+        .page-title {
+            text-align: center;
+            color: #713dc5;
+            margin-bottom: 25px;
+        }
+
+        .search-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .search-form input {
+            width: 320px;
+            max-width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .search-form button {
+            padding: 13px 22px;
+            background: #713dc5;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .search-form button:hover {
+            background: #5728a3;
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 25px;
+            align-items: stretch;
+        }
+
+        .job-card {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px #00000012;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .job-icon {
+            font-size: 40px;
+        }
+
+        .job-card h2 {
+            color: #713dc5;
+            margin: 15px 0;
+            overflow-wrap: anywhere;
+        }
+
+        .company {
+            color: #4772ed;
+            font-size: 19px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .job-info {
+            margin: 12px 0;
+            font-size: 17px;
+            overflow-wrap: anywhere;
+        }
+
+        .description {
+            margin-top: 25px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .details-btn {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background: #f0e8ff;
+            color: #713dc5;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+            border: 1px solid #d9c6f5;
+        }
+
+        .details-btn:hover {
+            background: #713dc5;
+            color: white;
+        }
+
+        .apply-btn {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background: linear-gradient(90deg, #9745b0, #4772ed);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: auto;
+            position: relative;
+            top: 15px;
+        }
+
+        .apply-btn:hover {
+            opacity: 0.9;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 35px 0;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            background: white;
+            color: #713dc5;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .pagination a:hover {
+            background: #713dc5;
+            color: white;
+        }
+
+        .page-info {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .empty-message {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+
+        .bottom-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .bottom-links a {
+            background: white;
+            color: #713dc5;
+            padding: 16px 22px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .bottom-links a:hover {
+            background: #713dc5;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            background: white;
+            color: #555;
+            padding: 18px;
+        }
+
+        @media (max-width: 750px) {
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h2>Student Job Portal</h2>
+    </header>
+
+    <main class="container">
+
+        <h1 class="page-title">Available Jobs</h1>
+
+        <!-- Search Form -->
+        <form method="GET" class="search-form">
+            <input
+                type="text"
+                name="q"
+                placeholder="Search job or company..."
+                value="{{ query }}"
+            >
+
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- Job Cards -->
+        <div class="jobs-grid">
+
+            {% for job in jobs %}
+
+                <div class="job-card">
+
+                    <div class="job-icon">💼</div>
+
+                    <h2>{{ job.title }}</h2>
+
+                    <div class="company">
+                        {{ job.company }}
+                    </div>
+
+                    <div class="job-info">
+                        <strong>Location:</strong> {{ job.location }}
+                    </div>
+
+                    <div class="job-info">
+                        <strong>Salary:</strong> {{ job.salary }}
+                    </div>
+
+                    <div class="job-info">
+                        <strong>Skills:</strong> {{ job.skills }}
+                    </div>
+
+                    <!-- Job Details Button -->
+                    <a href="{% url 'job-detail' job.id %}"
+                       class="details-btn">
+                        View Job Details →
+                    </a>
+
+                    <div class="description">
+                        <strong>Job Description:</strong>
+
+                        <p>
+                            {{ job.description|default:"No description available." }}
+                        </p>
+                    </div>
+
+                    <!-- Apply Button -->
+                    <a href="{% url 'apply_job' job.id %}"
+                       class="apply-btn">
+                        Apply Now →
+                    </a>
+
+                </div>
+
+            {% empty %}
+
+                <div class="empty-message">
+                    <h3>No jobs found.</h3>
+                    <p>Try another job title or company name.</p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Pagination -->
+        {% if page_obj.paginator.num_pages > 1 %}
+
+            <nav class="pagination" aria-label="Job pages">
+
+                {% if page_obj.has_previous %}
+
+                    <a href="?q={{ query|urlencode }}&page=1">
+                        First
+                    </a>
+
+                    <a href="?q={{ query|urlencode }}&page={{ page_obj.previous_page_number }}">
+                        ← Previous
+                    </a>
+
+                {% endif %}
+
+                <span class="page-info">
+                    Page {{ page_obj.number }}
+                    of {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if page_obj.has_next %}
+
+                    <a href="?q={{ query|urlencode }}&page={{ page_obj.next_page_number }}">
+                        Next →
+                    </a>
+
+                    <a href="?q={{ query|urlencode }}&page={{ page_obj.paginator.num_pages }}">
+                        Last
+                    </a>
+
+                {% endif %}
+
+            </nav>
+
+        {% endif %}
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-links">
+
+            <a href="{% url 'dashboard' %}">
+                 Dashboard
+            </a>
+
+            <a href="{% url 'my_applications' %}">
+                 My Applications
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        Student Job Portal | Learn • Apply • Grow
+    </footer>
+
+</body>
+</html>

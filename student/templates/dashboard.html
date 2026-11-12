@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Job Portal | Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 16px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e9e7ff, #e5f2ff, #fce7f3);
+            min-height: 100vh;
+            color: #252451;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            margin: 20px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 24px;
+            box-shadow: 0 15px 40px rgba(32, 11, 150, 0.15);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            margin: 0 0 16px;
+            font-size: 34px;
+            color: #252451;
+        }
+
+        .header h1 span {
+            color: #7045e8;
+        }
+
+        .welcome {
+            background: linear-gradient(135deg, #eee7ff, #f4e9ff);
+            padding: 22px;
+            border-radius: 18px;
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        .welcome h2 {
+            margin: 0 0 10px;
+            font-size: 27px;
+            color: #4f2ba8;
+        }
+
+        .welcome p {
+            margin: 0;
+            color: #68658a;
+            font-size: 15px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 32px;
+        }
+
+        .stat-box {
+            padding: 24px;
+            border-radius: 18px;
+            transition: transform 0.2s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-4px);
+        }
+
+        .jobs {
+            background: linear-gradient(135deg, #e1edff, #edf3ff);
+            border: 1px solid #d2e2ff;
+        }
+
+        .applications {
+            background: linear-gradient(135deg, #dcfce9, #edfff4);
+            border: 1px solid #c9f3d8;
+        }
+
+        .stat-box h3 {
+            margin: 0 0 12px;
+            font-size: 18px;
+        }
+
+        .stat-box .number {
+            margin: 0 0 10px;
+            font-size: 42px;
+            line-height: 1.2;
+            font-weight: bold;
+        }
+
+        .jobs .number {
+            color: #2563eb;
+        }
+
+        .applications .number {
+            color: #159957;
+        }
+
+        .stat-box .description {
+            margin: 0;
+            font-size: 13px;
+            color: #666782;
+        }
+
+        .section-title {
+            font-size: 21px;
+            margin-bottom: 18px;
+            color: #302c5d;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .menu a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 17px 22px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .menu a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 16px rgba(55, 45, 100, 0.18);
+        }
+
+        .view-jobs {
+            background: linear-gradient(100deg, #7045e8, #4778f5);
+        }
+
+        .my-profile {
+            background: linear-gradient(100deg, #0d9488, #19b88b);
+        }
+
+        .my-applications {
+            background: linear-gradient(100deg, #f59e0b, #fb923c);
+        }
+
+        .logout {
+            background: linear-gradient(100deg, #64748b, #8995a7);
+        }
+
+        .arrow {
+            font-size: 23px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 26px;
+            color: #8885a6;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 24px 18px;
+                margin: 5px auto;
+            }
+
+            .header h1 {
+                font-size: 27px;
+            }
+
+            .welcome h2 {
+                font-size: 22px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Main Heading -->
+        <div class="header">
+            <h1>🎓 Student <span>Job Portal</span></h1>
+        </div>
+
+        <!-- Welcome Section -->
+        <div class="welcome">
+            <h2>
+                {% if student %}
+                    Welcome, {{ student.name }}! 👋
+                {% else %}
+                    Welcome to your Dashboard 👋
+                {% endif %}
+            </h2>
+
+            <p>Your future is full of opportunities. Keep going! </p>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="stats">
+
+            <div class="stat-box jobs">
+                <h3>💼 Total Jobs</h3>
+
+                <p class="number">{{ total_jobs }}</p>
+
+                <p class="description">
+                    Available jobs in the portal
+                </p>
+            </div>
+
+            <div class="stat-box applications">
+                <h3>📄 My Applications</h3>
+
+                <p class="number">{{ total_applications }}</p>
+
+                <p class="description">
+                    Jobs you have applied for
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Quick Actions -->
+        <h3 class="section-title">🚀 Quick Actions</h3>
+
+        <div class="menu">
+
+            <a href="{% url 'job_list' %}" class="view-jobs">
+                <span> &nbsp; View Jobs</span>
+                <span class="arrow">›</span>
+            </a>
+
+            <a href="{% url 'profile' %}" class="my-profile">
+                <span> &nbsp; My Profile</span>
+                <span class="arrow">›</span>
+            </a>
+
+            <a href="{% url 'my_applications' %}" class="my-applications">
+                <span>📋 &nbsp; My Applications</span>
+                <span class="arrow">›</span>
+            </a>
+
+            <a href="{% url 'logout' %}" class="logout">
+                <span>🚪 &nbsp; Logout</span>
+                <span class="arrow">›</span>
+            </a>
+
+        </div>
+
+        <div class="footer">
+            Made with ❤️ for Student Job Portal
+        </div>
+
+    </div>
+
+</body>
+</html>

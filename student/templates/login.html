@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Job Portal | Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #edf4ff, #f8faff);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            background: #ffffff;
+            padding: 38px 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(37, 76, 130, 0.10);
+            border: 1px solid #e5ecf7;
+        }
+
+        .logo {
+            width: 58px;
+            height: 58px;
+            background: #e7efff;
+            color: #2859a8;
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 18px;
+            font-size: 28px;
+        }
+
+        .portal-title {
+            text-align: center;
+            color: #203858;
+            font-size: 25px;
+            margin-bottom: 28px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1e2f49;
+            font-size: 25px;
+            margin-bottom: 9px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #78869b;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #34445d;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d7e0ed;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            background: #ffffff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus {
+            border-color: #477bd1;
+            box-shadow: 0 0 0 3px rgba(71, 123, 209, 0.12);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: #2859a8;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: background 0.2s;
+        }
+
+        .login-btn:hover {
+            background: #204987;
+        }
+
+        .message {
+            background: #fff1f0;
+            color: #b42318;
+            border: 1px solid #ffd5d2;
+            padding: 11px;
+            border-radius: 7px;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .admin-note {
+            text-align: center;
+            color: #78869b;
+            font-size: 13px;
+            margin-top: 24px;
+            line-height: 1.6;
+        }
+
+        .admin-note a {
+            color: #2859a8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .admin-note a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #9aa6b7;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 23px;
+            }
+
+            .portal-title {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="logo">🎓</div>
+
+        <h1 class="portal-title">Student Job Portal</h1>
+
+        <h2>Welcome Back!</h2>
+        <p class="subtitle">Sign in to continue.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+
+            {% if error %}
+                <div class="message">{{ error }}</div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="login-btn">
+                Sign In as Student
+            </button>
+
+        </form>
+
+        <div class="admin-note">
+            Administrator?
+            <a href="/admin/">Use the Django Admin login</a>
+        </div>
+
+        <div class="footer">
+            Student Job Portal
+        </div>
+
+    </div>
+
+</body>
+</html>

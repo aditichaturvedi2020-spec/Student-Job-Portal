@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | Student Job Portal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 16px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e9e7ff, #e5f2ff, #fce7f3);
+            min-height: 100vh;
+            color: #302c5d;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 25px auto;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(72, 62, 130, 0.15);
+        }
+
+        .profile-header {
+            background: linear-gradient(120deg, #7045e8, #4778f5);
+            padding: 35px 25px;
+            text-align: center;
+            color: white;
+        }
+
+        .avatar {
+            width: 95px;
+            height: 95px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: white;
+            color: #7045e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .profile-header h1 {
+            margin: 0 0 10px;
+            font-size: 29px;
+        }
+
+        .profile-header p {
+            margin: 0;
+            color: #eee9ff;
+        }
+
+        .profile-content {
+            padding: 30px;
+        }
+
+        .section-title {
+            margin: 0 0 20px;
+            font-size: 21px;
+            color: #5737b7;
+        }
+
+        .info-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            background: #f8f7ff;
+            border: 1px solid #ece7ff;
+            border-radius: 14px;
+            padding: 17px;
+            margin-bottom: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .info-icon {
+            width: 45px;
+            height: 45px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            background: #e9e1ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .info-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .info-text h3 {
+            margin: 2px 0 7px;
+            font-size: 14px;
+            color: #777394;
+        }
+
+        .info-text p {
+            margin: 0;
+            color: #302c5d;
+            font-size: 16px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        .skills-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 8px;
+        }
+
+        .skill {
+            background: #e5f8ee;
+            color: #157347;
+            border-radius: 20px;
+            padding: 8px 13px;
+            font-size: 13px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .empty {
+            color: #85819e !important;
+            font-style: italic;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 150px;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            padding: 15px 18px;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 16px rgba(55, 45, 100, 0.18);
+        }
+
+        .edit-btn {
+            background: linear-gradient(100deg, #7045e8, #4778f5);
+        }
+
+        .dashboard-btn {
+            background: linear-gradient(100deg, #0d9488, #19b88b);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 0 20px 25px;
+            color: #9995b2;
+            font-size: 12px;
+        }
+
+        @media (max-width: 500px) {
+            .profile-content {
+                padding: 22px 17px;
+            }
+
+            .profile-header h1 {
+                font-size: 24px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+
+            <div class="avatar">👩‍🎓</div>
+
+            <h1>My Profile ✨</h1>
+
+            <p>
+                {% if student.name %}
+                    Welcome, {{ student.name }}!
+                {% else %}
+                    Welcome, Student!
+                {% endif %}
+            </p>
+
+        </div>
+
+        <!-- Profile Details -->
+        <div class="profile-content">
+
+            <h2 class="section-title">💜 Personal Information</h2>
+
+            <div class="info-card">
+                <div class="info-icon">👤</div>
+                <div class="info-text">
+                    <h3>Full Name</h3>
+                    <p>{{ student.name|default:"Not provided" }}</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📧</div>
+                <div class="info-text">
+                    <h3>Email Address</h3>
+                    <p>{{ student.email|default:"Not provided" }}</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📱</div>
+                <div class="info-text">
+                    <h3>Phone Number</h3>
+                    <p>{{ student.phone|default:"Not provided" }}</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">🎓</div>
+                <div class="info-text">
+                    <h3>Course</h3>
+                    <p>{{ student.course|default:"Not provided" }}</p>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 30px;">
+                🌟 About Me
+            </h2>
+
+            <div class="info-card">
+                <div class="info-icon">📝</div>
+                <div class="info-text">
+                    <h3>My Bio</h3>
+                    <p>{% if profile.bio %}{{ profile.bio }}{% else %}Bio not added yet.{% endif %}</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">💡</div>
+                <div class="info-text">
+                    <h3>My Skills</h3>
+
+                    {% if profile.skills %}
+                        <div class="skills-box">
+                            {% for skill in profile.skills.split %}
+                                <span class="skill">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="empty">Skills not added yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="buttons">
+
+                <a href="{% url 'edit_profile' %}" class="btn edit-btn">
+                    ✏️ Edit Profile
+                </a>
+
+                <a href="{% url 'dashboard' %}" class="btn dashboard-btn">
+                    🏠 Back to Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="footer">
+            Made with ❤️ for Student Job Portal
+        </div>
+
+    </div>
+
+</body>
+</html>
